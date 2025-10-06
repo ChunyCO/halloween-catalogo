@@ -308,6 +308,7 @@ body {
   padding: 16px;
   border-radius: 12px;
   text-align: center;
+  width: 100%;
 }
 
 .price-box.deal {
