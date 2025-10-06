@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -7,11 +8,12 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/style.css">
 </head>
+
 <body>
   <nav class="topbar">
     <a href="index.html">← Volver al catálogo</a>
   </nav>
-  
+
   <main class="container">
     <div class="product">
       <div class="product__gallery-container">
@@ -26,14 +28,14 @@
           <span class="tag">🎃 Máscara Halloween</span>
           <h1 id="pname"></h1>
         </div>
-        
+
         <div class="prices">
           <div class="price-box">
             <span class="label">Precio unitario</span>
             <span id="p1" class="value"></span>
           </div>
           <div class="price-box deal">
-            <span class="label">Precio 2x1 (c/u)</span>
+            <span class="label">Precio 2 o más unidades</span>
             <span id="p2" class="value deal"></span>
           </div>
         </div>
@@ -52,11 +54,12 @@
         <div class="product__actions">
           <div class="product__code">
             <span class="sku">Código: <span id="pid"></span></span>
-            <button class="copy-btn" onclick="ProductsModule.copyToClipboard(document.getElementById('pid').textContent)">
+            <button class="copy-btn"
+              onclick="ProductsModule.copyToClipboard(document.getElementById('pid').textContent)">
               📋 Copiar código
             </button>
           </div>
-          
+
           <a id="whatsapp-buy" class="buy-now-btn" target="_blank">
             🛒 ¡Comprar ahora por WhatsApp!
           </a>
@@ -70,8 +73,8 @@
     <img id="lightboxImg" alt="Vista ampliada">
   </div>
 
-<script src="assets/app.js"></script>
-<script>
+  <script src="assets/app.js"></script>
+  <script>
     const params = new URLSearchParams(window.location.search);
     const id = params.get('id');
     if (id) {
@@ -79,6 +82,7 @@
     } else {
       window.location.href = 'index.html';
     }
-</script>
+  </script>
 </body>
+
 </html>
