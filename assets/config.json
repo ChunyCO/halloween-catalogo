@@ -1,0 +1,60 @@
+{
+  "theme": {
+    "colors": {
+      "background": "#0f0f0f",
+      "cardBackground": "#1c1c1c",
+      "cardBorder": "#2d2d2d",
+      "accent": "#ffffff",
+      "deal": "#e6e6e6",
+      "dealBorder": "#404040",
+      "whatsapp": "#25D366",
+      "text": "#ffffff",
+      "textSecondary": "rgba(255, 255, 255, 0.7)",
+      "shadow": "rgba(0, 0, 0, 0.3)",
+      "buttonBackground": "#404040",
+      "buttonHover": "#505050",
+      "priceBox": "#252525",
+      "dealBox": "#333333"
+    },
+    "spacing": {
+      "small": "8px",
+      "medium": "16px",
+      "large": "24px",
+      "xlarge": "32px"
+    },
+    "borderRadius": {
+      "small": "8px",
+      "medium": "12px",
+      "large": "16px",
+      "round": "20px"
+    },
+    "typography": {
+      "fontFamily": "Inter, system-ui, sans-serif",
+      "sizes": {
+        "small": "12px",
+        "regular": "14px",
+        "medium": "16px",
+        "large": "18px",
+        "xlarge": "24px",
+        "hero": "42px"
+      }
+    }
+  },
+  "ui": {
+    "animations": {
+      "transition": "0.3s ease",
+      "hover": {
+        "transform": "translateY(-4px)",
+        "shadow": "0 12px 32px"
+      }
+    },
+    "layout": {
+      "maxWidth": "1100px",
+      "gridMinWidth": "260px"
+    }
+  },
+  "messages": {
+    "copied": "¡Código copiado!",
+    "whatsapp": "¡Hola! Me interesa la máscara {productName} (Código: {productId}). ¿Está disponible?"
+  }
+}

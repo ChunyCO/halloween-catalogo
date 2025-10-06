@@ -1,13 +1,13 @@
 :root {
-  --card-bg: #1a1a1f;
-  --card-bd: #2a2a35;
-  --accent: #ff4800;
-  --deal: #ff47c2;
-  --deal-bd: #4a2040;
+  --card-bg: #1c1c1c;
+  --card-bd: #2d2d2d;
+  --accent: #ffffff;
+  --deal: #e6e6e6;
+  --deal-bd: #404040;
   --whatsapp: #25D366;
   --text: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.8);
-  --shadow: rgba(255, 72, 0, 0.2);
+  --text-secondary: rgba(255, 255, 255, 0.7);
+  --shadow: rgba(0, 0, 0, 0.3);
 }
 
 * { box-sizing: border-box; }
@@ -15,13 +15,12 @@
 html, body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
-  background: #0b0b0f;
+  background: #0f0f0f;
   color: var(--text);
 }
 
 .hero {
-  background: radial-gradient(1200px 400px at 20% -20%, var(--accent) 0%, rgba(255, 72, 0, 0.16) 50%, transparent 70%),
-              linear-gradient(180deg, var(--card-bg), #0b0b0f);
+  background: linear-gradient(180deg, #2d2d2d 0%, #0f0f0f 100%);
 }
 
 .hero__inner {
@@ -106,7 +105,7 @@ html, body {
 }
 
 .price {
-  background: #23232c;
+  background: #252525;
   padding: 8px 12px;
   border-radius: 12px;
   font-weight: 600;
@@ -114,7 +113,7 @@ html, body {
 }
 
 .price--deal {
-  background: #2a1f28;
+  background: #333333;
   color: var(--deal);
   border: 1px solid var(--deal-bd);
 }
@@ -132,7 +131,7 @@ html, body {
 }
 
 .copy-btn {
-  background: var(--accent);
+  background: #404040;
   color: white;
   border: none;
   border-radius: 8px;
@@ -143,7 +142,7 @@ html, body {
 }
 
 .copy-btn:hover {
-  background: #ff5a1a;
+  background: #505050;
 }
 
 .toast {
@@ -151,7 +150,7 @@ html, body {
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  background: var(--accent);
+  background: #333333;
   color: white;
   padding: 12px 24px;
   border-radius: 8px;
@@ -198,12 +197,13 @@ html, body {
 .product__gallery {
   display: grid;
   gap: 16px;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 }
 
 .product__gallery img {
   width: 100%;
-  height: 250px;
+  aspect-ratio: 1;
+  height: auto;
   object-fit: cover;
   border-radius: 12px;
   cursor: zoom-in;
@@ -237,7 +237,7 @@ html, body {
 
 .tag {
   display: inline-block;
-  background: rgba(255, 72, 0, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--accent);
   padding: 6px 12px;
   border-radius: 20px;
@@ -245,14 +245,14 @@ html, body {
 }
 
 .price-box {
-  background: #1c1c25;
+  background: #252525;
   padding: 16px;
   border-radius: 12px;
   text-align: center;
 }
 
 .price-box.deal {
-  background: #1f1522;
+  background: #333333;
   border: 1px solid var(--deal-bd);
 }
 
@@ -309,7 +309,7 @@ html, body {
   gap: 12px;
   margin-bottom: 16px;
   padding: 12px;
-  background: #1c1c25;
+  background: #252525;
   border-radius: 12px;
 }
 
@@ -388,7 +388,7 @@ html, body {
 .topbar {
   position: sticky;
   top: 0;
-  background: var(--card-bg);
+  background: #1c1c1c;
   border-bottom: 1px solid var(--card-bd);
   padding: 16px;
   z-index: 100;
@@ -404,5 +404,5 @@ html, body {
 }
 
 .topbar a:hover {
-  color: var(--accent);
+  color: #cccccc;
 }

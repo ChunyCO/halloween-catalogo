@@ -5,10 +5,7 @@ const ProductsModule = {
       const res = await fetch('assets/products.json');
       if (res.ok) return await res.json();
     } catch (e) {
-      const embedded = document.querySelector('script#products');
-      if (embedded?.textContent) {
-        try { return JSON.parse(embedded.textContent); } catch (e) { }
-      }
+      console.error('Error cargando productos:', e);
     }
     return { products: [] };
   },
@@ -19,26 +16,72 @@ const ProductsModule = {
 
   copyToClipboard(text) {
     navigator.clipboard.writeText(text).then(() => {
-      const toast = document.createElement('div');
-      toast.className = 'toast';
-      toast.textContent = '¡Código copiado!';
-      document.body.appendChild(toast);
-      setTimeout(() => toast.remove(), 2000);
+      UIModule.showToast('¡Código copiado!');
     });
+  },
+
+  createWhatsAppLink(product) {
+    const message = `¡Hola! Me interesa la máscara ${product.name} (Código: ${product.id}). ¿Está disponible?`;
+    return `https://wa.me/573246052525?text=${encodeURIComponent(message)}`;
   }
 };
 
+// Módulo de UI
+const UIModule = {
+  showToast(message) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.textContent = message;
+    document.body.appendChild(toast);
+    setTimeout(() => toast.remove(), 2000);
+  },
+
+  createGallery(product) {
+    const gallery = document.createElement('div');
+    gallery.className = 'product__gallery';
+    
+    product.images.forEach(src => {
+      const img = document.createElement('img');
+      img.src = src;
+      img.alt = product.name;
+      img.loading = 'lazy';
+      img.addEventListener('click', () => this.openLightbox(src));
+      gallery.appendChild(img);
+    });
+    
+    return gallery;
+  },
+
+  openLightbox(src) {
+    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightboxImg');
+    img.src = src;
+    img.alt = 'Vista ampliada';
+    lightbox.classList.add('is-open');
+  },
+
+  closeLightbox() {
+    const lightbox = document.getElementById('lightbox');
+    lightbox.classList.remove('is-open');
+  }
+};
+
+// Inicialización
+async function initialize() {
+  const { products } = await ProductsModule.loadProducts();
+  return { products };
+}
+
 // Renderizado de páginas
 async function renderIndex() {
-  const data = await ProductsModule.loadProducts();
+  const { products } = await initialize();
   const grid = document.getElementById('grid');
-  if (!grid) return;
-  
   grid.innerHTML = '';
-  data.products.forEach(product => {
+  
+  products.forEach(product => {
     const card = document.createElement('a');
     card.className = 'card';
-    card.href = 'producto.html?id=' + product.id;
+    card.href = `producto.html?id=${product.id}`;
     card.innerHTML = `
       <div class="card__img">
         <img src="${product.images[0]}" alt="${product.name}" loading="lazy">
@@ -61,8 +104,8 @@ async function renderIndex() {
 }
 
 async function renderProductPage(id) {
-  const data = await ProductsModule.loadProducts();
-  const product = data.products.find(x => x.id === id);
+  const { products } = await initialize();
+  const product = products.find(p => p.id === id);
   if (!product) {
     window.location.href = 'index.html';
     return;
@@ -74,38 +117,22 @@ async function renderProductPage(id) {
   document.getElementById('p2').textContent = ProductsModule.formatMoney(product.price2);
   document.getElementById('pid').textContent = product.id;
 
-  // Configurar el botón de WhatsApp
   const whatsappBtn = document.getElementById('whatsapp-buy');
-  const message = encodeURIComponent(`¡Hola! Me interesa comprar: ${product.name} (Código: ${product.id})`);
-  whatsappBtn.href = `https://wa.me/573246052525?text=${message}`;
+  whatsappBtn.href = ProductsModule.createWhatsAppLink(product);
 
-  // Renderizar galería
-  const gallery = document.getElementById('gallery');
-  gallery.innerHTML = '';
-  product.images.forEach(src => {
-    const img = document.createElement('img');
-    img.src = src;
-    img.alt = product.name;
-    img.loading = 'lazy';
-    img.addEventListener('click', () => openLightbox(src));
-    gallery.appendChild(img);
-  });
+  const galleryContainer = document.getElementById('gallery');
+  galleryContainer.innerHTML = '';
+  galleryContainer.appendChild(UIModule.createGallery(product));
 }
 
-function openLightbox(src) {
-  const lightbox = document.getElementById('lightbox');
-  const img = document.getElementById('lightboxImg');
-  img.src = src;
-  lightbox.classList.add('is-open');
-}
-
+// Event Listeners
 document.addEventListener('click', e => {
   if (e.target.matches('.lightbox__close') || e.target.id === 'lightbox') {
-    const lightbox = document.getElementById('lightbox');
-    lightbox.classList.remove('is-open');
+    UIModule.closeLightbox();
   }
 });
 
 // Exportar funciones necesarias
 window.renderIndex = renderIndex;
 window.renderProductPage = renderProductPage;
+window.ProductsModule = ProductsModule;
