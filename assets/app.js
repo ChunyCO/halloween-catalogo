@@ -39,17 +39,56 @@ const UIModule = {
   createGallery(product) {
     const gallery = document.createElement('div');
     gallery.className = 'product__gallery';
-
-    product.images.forEach(src => {
+    
+    product.images.forEach((src, index) => {
       const img = document.createElement('img');
       img.src = src;
-      img.alt = product.name;
+      img.alt = `${product.name} - Imagen ${index + 1}`;
       img.loading = 'lazy';
+      img.dataset.index = index;
       img.addEventListener('click', () => this.openLightbox(src));
       gallery.appendChild(img);
     });
-
+    
     return gallery;
+  },
+
+  setupGalleryNavigation(product) {
+    const prevBtn = document.getElementById('prevImage');
+    const nextBtn = document.getElementById('nextImage');
+    const gallery = document.getElementById('gallery');
+    
+    let currentIndex = 0;
+    const totalImages = product.images.length;
+
+    const updateNavigation = () => {
+      prevBtn.disabled = currentIndex === 0;
+      nextBtn.disabled = currentIndex === totalImages - 1;
+    };
+
+    const showImage = (index) => {
+      const images = gallery.querySelectorAll('img');
+      images.forEach((img, i) => {
+        img.style.display = i === index ? 'block' : 'none';
+      });
+      currentIndex = index;
+      updateNavigation();
+    };
+
+    prevBtn.addEventListener('click', () => {
+      if (currentIndex > 0) {
+        showImage(currentIndex - 1);
+      }
+    });
+
+    nextBtn.addEventListener('click', () => {
+      if (currentIndex < totalImages - 1) {
+        showImage(currentIndex + 1);
+      }
+    });
+
+    // Mostrar la primera imagen al cargar
+    showImage(0);
   },
 
   openLightbox(src) {
@@ -123,6 +162,9 @@ async function renderProductPage(id) {
   const galleryContainer = document.getElementById('gallery');
   galleryContainer.innerHTML = '';
   galleryContainer.appendChild(UIModule.createGallery(product));
+  
+  // Configurar la navegación de la galería
+  UIModule.setupGalleryNavigation(product);
 }
 
 // Event Listeners
