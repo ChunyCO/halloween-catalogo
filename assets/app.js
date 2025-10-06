@@ -39,7 +39,7 @@ const UIModule = {
   createGallery(product) {
     const gallery = document.createElement('div');
     gallery.className = 'product__gallery';
-    
+
     product.images.forEach(src => {
       const img = document.createElement('img');
       img.src = src;
@@ -48,7 +48,7 @@ const UIModule = {
       img.addEventListener('click', () => this.openLightbox(src));
       gallery.appendChild(img);
     });
-    
+
     return gallery;
   },
 
@@ -77,7 +77,7 @@ async function renderIndex() {
   const { products } = await initialize();
   const grid = document.getElementById('grid');
   grid.innerHTML = '';
-  
+
   products.forEach(product => {
     const card = document.createElement('a');
     card.className = 'card';
@@ -89,11 +89,11 @@ async function renderIndex() {
       <div class="card__body">
         <h2>${product.name}</h2>
         <div class="prices">
-          <span class="price">1 unid: ${ProductsModule.formatMoney(product.price)}</span>
-          <span class="price price--deal">2x1 c/u: ${ProductsModule.formatMoney(product.price2)}</span>
+          <span class="price">1 unidad: ${ProductsModule.formatMoney(product.price)}</span>
+          <span class="price price--deal">2 o más unidades: ${ProductsModule.formatMoney(product.price2)}</span>
         </div>
         <div class="code-container">
-          <span class="code">Cod: ${product.id}</span>
+          <span class="code">Código: ${product.id}</span>
           <button class="copy-btn" onclick="event.preventDefault(); ProductsModule.copyToClipboard('${product.id}')">
             📋 Copiar
           </button>

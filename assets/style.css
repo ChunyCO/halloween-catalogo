@@ -10,9 +10,12 @@
   --shadow: rgba(0, 0, 0, 0.3);
 }
 
-* { box-sizing: border-box; }
+* {
+  box-sizing: border-box;
+}
 
-html, body {
+html,
+body {
   margin: 0;
   font-family: Inter, system-ui, sans-serif;
   background: #0f0f0f;
@@ -110,12 +113,14 @@ html, body {
   border-radius: 12px;
   font-weight: 600;
   font-size: 14px;
+  width: 100%;
 }
 
 .price--deal {
   background: #333333;
   color: var(--deal);
   border: 1px solid var(--deal-bd);
+  width: 100%;
 }
 
 .code-container {
@@ -159,10 +164,25 @@ html, body {
 }
 
 @keyframes fadeInOut {
-  0% { opacity: 0; transform: translate(-50%, 20px); }
-  15% { opacity: 1; transform: translate(-50%, 0); }
-  85% { opacity: 1; transform: translate(-50%, 0); }
-  100% { opacity: 0; transform: translate(-50%, -20px); }
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 20px);
+  }
+
+  15% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  85% {
+    opacity: 1;
+    transform: translate(-50%, 0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -20px);
+  }
 }
 
 .footer {
@@ -175,11 +195,12 @@ html, body {
   .hero h1 {
     font-size: 32px;
   }
-  
+
   .grid {
     grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   }
 }
+
 .product {
   display: grid;
   gap: 32px;
@@ -335,11 +356,11 @@ html, body {
   .product {
     grid-template-columns: 1fr;
   }
-  
+
   .product__info {
     position: static;
   }
-  
+
   .prices {
     grid-template-columns: 1fr;
   }
